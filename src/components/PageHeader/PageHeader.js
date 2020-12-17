@@ -1,3 +1,4 @@
+//Makes Header for Amazonia
 import { Component } from "react";
 //import "./Pageheader.css";
 import Logo from './logo_new.svg';
