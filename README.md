@@ -30,6 +30,18 @@ The available endpoints are:
 - `DELETE /wishlist/:id`
 - `PUT /wishlist/:id`
 
+### `npm run migrate`
+
+Runs the database migrations
+
+### `npm run rollback`
+
+Rolls back the database migrations
+
+### `npm run seed`
+
+Clears the database and seeds it with some data
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -45,3 +57,16 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Here is a diagram of the database schema:
 
 ![database schema](./schema.png)
+
+### Environment Variables
+
+to set your environment variables, create a file called `.env` and put this into it:
+
+```
+DB_HOST=localhost
+DB_USER=postgres
+DB_NAME=amazonia
+DB_PASS=
+```
+
+be sure to enter your password.
