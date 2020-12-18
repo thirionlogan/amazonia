@@ -40,7 +40,10 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "node server/server.js"
+    "server": "node server/server.js",
+    "migrate": "cd server && knex migrate:latest",
+    "rollback": "cd server &&knex migrate:rollback",
+    "seed": "cd server && knex seed:run "
   },
   "eslintConfig": {
     "extends": [
