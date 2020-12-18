@@ -68,11 +68,23 @@
       "<rootDir>/src",
       "<rootDir>/server"
     ],
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "server/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
-      "!server/**/*.d.ts"
+      "!server/**/*.d.ts",
+      "!server/server.js",
+      "!src/reportWebVitals.js",
+      "!src/index.js"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
