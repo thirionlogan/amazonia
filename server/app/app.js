@@ -1,10 +1,7 @@
-const fs = require('fs');
-const bodyParser = require('body-parser');
-
 const express = require('express');
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get('/wishlist', (req, res) => {
   res.status(200).send({
