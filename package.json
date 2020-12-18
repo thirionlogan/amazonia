@@ -84,7 +84,9 @@
       "!server/**/*.d.ts",
       "!server/server.js",
       "!src/reportWebVitals.js",
-      "!src/index.js"
+      "!src/index.js",
+      "!server/data/**/*.js",
+      "!server/knexfile.js"
     ],
     "setupFiles": [
       "react-app-polyfill/jsdom"
