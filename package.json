@@ -37,10 +37,10 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "npm run migrate && npm run seed && node scripts/start.js",
+    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "node server/server.js",
+    "server": "npm run migrate && npm run seed && node server/server.js",
     "migrate": "cd server && knex migrate:latest",
     "rollback": "cd server &&knex migrate:rollback",
     "seed": "cd server && knex seed:run "
