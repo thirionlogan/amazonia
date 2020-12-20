@@ -15,13 +15,8 @@ module.exports = {
     seeds: { directory: './data/seeds' },
   },
   test: {
-    client: 'pg',
-    connection: {
-      host: process.env.HOST || 'localhost',
-      database: process.env.DB_NAME,
-      user: process.env.DB_USER || 'postgres',
-      password: process.env.DB_PASS,
-    },
+    client: 'sqlite3',
+    connection: ':memory:',
     migrations: {
       directory: './server/data/migrations',
     },
