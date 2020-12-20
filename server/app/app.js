@@ -1,7 +1,7 @@
 const express = require('express');
 const Promise = require('bluebird');
 const app = express();
-const { WishList, WishListItem, Bookshelf } = require('../models');
+const { WishList, WishListItem } = require('../models');
 const errorHandler = require('../middleware/errorHandler');
 
 app.use(express.json());
