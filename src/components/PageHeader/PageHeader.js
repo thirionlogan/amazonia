@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './PageHeader.css';
 import Logo from './logo.svg';
 
-class PageHeader extends Component {
-  render() {
+export default function PageHeader(){
     return (
-      <header>
-        <img src={Logo} alt='logo'></img>
-        <input type='text' placeholder='Search'></input>
-      </header>
+        <header>
+            <img src={Logo} alt='logo'></img>
+            <input type='text' placeholder='Search'></input>
+        </header>
     );
-  }
 }
-
-export default PageHeader;
