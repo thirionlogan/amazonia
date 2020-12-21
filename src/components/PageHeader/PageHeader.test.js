@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { TextField } from '@material-ui/core';
 
 import PageHeader from './PageHeader';
 
@@ -14,6 +15,6 @@ describe('PageHeader', () => {
   });
 
   it('Does header contain a seach bar', () => {
-    expect(component.exists('input')).toBe(true);
+    expect(component.exists(TextField)).toBe(true);
   });
 });
