@@ -14,7 +14,14 @@ module.exports = {
     },
     seeds: { directory: './data/seeds' },
   },
-
+  test: {
+    client: 'sqlite3',
+    connection: ':memory:',
+    migrations: {
+      directory: './server/data/migrations',
+    },
+    seeds: { directory: './server/data/seeds' },
+  },
   staging: {
     client: 'pg',
     connection: {
@@ -27,7 +34,6 @@ module.exports = {
     },
     seeds: { directory: './data/seeds' },
   },
-
   production: {
     client: 'pg',
     connection: {
