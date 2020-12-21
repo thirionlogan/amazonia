@@ -9,7 +9,7 @@ class Home extends React.Component{
     }
 
     componentDidMount(){
-        //  fetch("http://3.21.164.220/products?count=10")
+        //  fetch("url")
         //     .then((response) => response.json())
         //     .then((data) => this.setState({ wishlist: data}))
     }
