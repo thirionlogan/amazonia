@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 import { Paper, TextField, Button, FormControl } from '@material-ui/core/';
 import SaveIcon from '@material-ui/icons/Save';
+import { makeStyles } from '@material-ui/core/styles';
 
 import './WishlistEditor.css';
 
+const useStyles = makeStyles({
+  wishlistEditorContainer: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  paper: {
+    width: '50%',
+    padding: '3%',
+  },
+  input: {
+    marginBottom: '16px',
+  },
+});
+
 const WishlistEditor = () => {
+  const classes = useStyles();
+
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
   const [items, setItems] = useState(['']);
@@ -47,6 +66,9 @@ const WishlistEditor = () => {
     fetch('http://localhost:3001/wishlist', {
       method: 'POST',
       body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   };
 
@@ -68,11 +90,12 @@ const WishlistEditor = () => {
   };
 
   return (
-    <div>
+    <div className={classes.wishlistEditorContainer}>
       <h1>Make a Wishlist</h1>
-      <Paper>
+      <Paper className={classes.paper}>
         <FormControl>
           <TextField
+            className={classes.input}
             error={nameErrorText ? true : false}
             helperText={nameErrorText}
             id='nameInput'
@@ -81,6 +104,7 @@ const WishlistEditor = () => {
             value={name}
           />
           <TextField
+            className={classes.input}
             error={authorErrorText ? true : false}
             helperText={authorErrorText}
             id='authorInput'
@@ -91,6 +115,7 @@ const WishlistEditor = () => {
           {items.map((item, index) => {
             return (
               <TextField
+                className={classes.input}
                 error={itemErrorText ? true : false}
                 helperText={itemErrorText}
                 key={`itemInput${index + 1}`}
