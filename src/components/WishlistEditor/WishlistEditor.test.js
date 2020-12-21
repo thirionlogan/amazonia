@@ -44,6 +44,9 @@ describe('Wishlist Editor', () => {
     expect(fetch).toBeCalledWith('http://localhost:3001/wishlist', {
       method: 'POST',
       body: JSON.stringify(wishlist),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
   });
 
