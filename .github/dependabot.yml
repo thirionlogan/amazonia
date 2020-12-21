@@ -13,7 +13,7 @@ updates:
     assignees:
       - "thirionlogan"
     reviewers:
-      - "thirionlogan
+      - "thirionlogan"
       - "brentogunmakin"
       - "hilldauk"
       - "SippingTrix"
@@ -23,10 +23,10 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-     assignees:
+    assignees:
       - "thirionlogan"
     reviewers:
-      - "thirionlogan
+      - "thirionlogan"
       - "brentogunmakin"
       - "hilldauk"
       - "SippingTrix"
