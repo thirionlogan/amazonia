@@ -1,4 +1,11 @@
 # amazonia
+![Build](https://img.shields.io/github/workflow/status/thirionlogan/amazonia/Node.js%20CI)
+![Open Issues](https://img.shields.io/github/issues/thirionlogan/amazonia)
+![Bugs](https://img.shields.io/github/issues/thirionlogan/amazonia/bug)
+![Closed Issues](https://img.shields.io/github/issues-closed/thirionlogan/amazonia)
+![Pull Requests](https://img.shields.io/github/issues-pr/thirionlogan/amazonia)
+![MVP Progress](https://img.shields.io/github/milestones/progress-percent/thirionlogan/amazonia/1)
+![MIT License](https://img.shields.io/github/license/thirionlogan/amazonia)
 
 Amazonia is a web app for tracking wish lists and their completion
 
