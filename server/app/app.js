@@ -28,7 +28,12 @@ const createWishlist = async ({ name, author, items }) => {
     })
     .then(({ id }) => {
       return Promise.all(
-        items.map((item) => new WishListItem({ name: item, wishlist_id: id }))
+        items.map((item) => {
+          return new WishListItem({ name: item, wishlist_id: id }).save(null, {
+            require: true,
+            method: 'insert',
+          });
+        })
       );
     });
 };
