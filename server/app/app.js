@@ -1,11 +1,13 @@
 const express = require('express');
 const Promise = require('bluebird');
+var cors = require('cors');
 const app = express();
 const { WishList, WishListItem } = require('../models');
 const errorHandler = require('../middleware/errorHandler');
 
 app.use(express.json());
 app.use(errorHandler);
+app.use(cors());
 
 const getAllWishlists = async () => {
   return WishList.fetchAll({ withRelated: ['items'], require: true });
