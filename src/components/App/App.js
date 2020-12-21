@@ -1,8 +1,8 @@
 import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
+import Home from '../Home/Home';
 
 import './App.css';
 
 export default function App() {
-  return <PageHeader />;
+  return <Home />;
 }
