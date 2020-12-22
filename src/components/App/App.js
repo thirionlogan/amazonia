@@ -1,7 +1,9 @@
 import React from 'react';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { handleSendWishlist, handleGetWishlists } from '../../client/client';
 import PageHeader from '../PageHeader/PageHeader';
 import WishlistEditor from '../WishlistEditor/WishlistEditor';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import HomePage from '../HomePage/HomePage';
 
 import './App.css';
 
@@ -16,7 +18,8 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className='App'>
         <PageHeader />
-        <WishlistEditor />
+        <WishlistEditor handleSendWishlist={handleSendWishlist} />
+        <HomePage handleGetWishlists={handleGetWishlists} />
       </div>
     </ThemeProvider>
   );

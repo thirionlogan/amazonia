@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { TextField, Button } from '@material-ui/core/';
+import { handleSendWishlist } from '../../client/client';
 
 import WishlistEditor from './WishlistEditor';
 
@@ -12,14 +13,15 @@ describe('Wishlist Editor', () => {
     items: ['a clone of myself', 'a pair of Yeezys', 'MAGA hat'],
   };
 
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve({ created: true }),
-    })
-  );
+  let mockSendWishlist = jest.fn();
 
   beforeEach(() => {
-    component = mount(<WishlistEditor />);
+    mockSendWishlist.mockImplementation(handleSendWishlist);
+    component = mount(<WishlistEditor handleSendWishlist={mockSendWishlist} />);
+  });
+
+  afterEach(() => {
+    mockSendWishlist.mockReset();
   });
 
   it('sends request to backend when wishlist is made', () => {
@@ -41,13 +43,7 @@ describe('Wishlist Editor', () => {
     const saveButton = component.find(Button);
     saveButton.simulate('click');
 
-    expect(fetch).toBeCalledWith('http://localhost:3001/wishlist', {
-      method: 'POST',
-      body: JSON.stringify(wishlist),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    expect(mockSendWishlist).toBeCalledWith(wishlist);
   });
 
   it('should add item fields as they are input', () => {
@@ -78,7 +74,7 @@ describe('Wishlist Editor', () => {
 
       let nameInput = component.find(TextField).at(0);
 
-      expect(fetch).not.toBeCalled();
+      expect(mockSendWishlist).not.toBeCalled();
       expect(nameInput.prop('error')).toBe(true);
       expect(nameInput.prop('helperText')).toBe('Name is required');
     });
@@ -102,7 +98,7 @@ describe('Wishlist Editor', () => {
 
       let authorInput = component.find(TextField).at(1);
 
-      expect(fetch).not.toBeCalled();
+      expect(mockSendWishlist).not.toBeCalled();
       expect(authorInput.prop('error')).toBe(true);
       expect(authorInput.prop('helperText')).toBe('Author is required');
     });
@@ -118,7 +114,7 @@ describe('Wishlist Editor', () => {
 
       let itemInput = component.find(TextField).at(2);
 
-      expect(fetch).not.toBeCalled();
+      expect(mockSendWishlist).not.toBeCalled();
       expect(itemInput.prop('error')).toBe(true);
       expect(itemInput.prop('helperText')).toBe(
         'At least one item is required'
