@@ -1,4 +1,5 @@
 # amazonia
+
 ![Build](https://img.shields.io/github/workflow/status/thirionlogan/amazonia/Node.js%20CI)
 ![Open Issues](https://img.shields.io/github/issues/thirionlogan/amazonia)
 ![Bugs](https://img.shields.io/github/issues/thirionlogan/amazonia/bug)
@@ -77,3 +78,13 @@ DB_PASS=
 ```
 
 be sure to enter your password.
+
+### Starting/Stopping your postgres server
+
+- Windows:
+  - start: `pg_ctl -D "C:\Program Files\PostgreSQL\13\data" start`
+  - stop: `pg_ctl -D "C:\Program Files\PostgreSQL\13\data" stop`
+  - restart: `pg_ctl -D "C:\Program Files\PostgreSQL\13\data" restart`
+- Mac:
+  - start: `pg_ctl -D /usr/local/var/postgres start`
+  - stop: `pg_ctl -D /usr/local/var/postgres stop`

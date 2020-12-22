@@ -1,11 +1,13 @@
 const express = require('express');
 const Promise = require('bluebird');
+var cors = require('cors');
 const app = express();
 const { WishList, WishListItem } = require('../models');
 const errorHandler = require('../middleware/errorHandler');
 
 app.use(express.json());
 app.use(errorHandler);
+app.use(cors());
 
 const getAllWishlists = async () => {
   return WishList.fetchAll({ withRelated: ['items'], require: true });
@@ -26,7 +28,12 @@ const createWishlist = async ({ name, author, items }) => {
     })
     .then(({ id }) => {
       return Promise.all(
-        items.map((item) => new WishListItem({ name: item, wishlist_id: id }))
+        items.map((item) => {
+          return new WishListItem({ name: item, wishlist_id: id }).save(null, {
+            require: true,
+            method: 'insert',
+          });
+        })
       );
     });
 };
