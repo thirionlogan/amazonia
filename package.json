@@ -5,14 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
-=======
->>>>>>> f69a636 (Accordion implmentation with hardcoded values)
-=======
->>>>>>> f69a63648e04b4872e4b59b2e94b20743458be6c
     "bfj": "^7.0.2",
     "bluebird": "^3.7.2",
     "bookshelf": "^1.2.0",
@@ -181,6 +175,7 @@
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.0",
+    "jest-fetch-mock": "^3.0.3",
     "jest-resolve": "^26.6.2",
     "jest-watch-typeahead": "^0.6.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
