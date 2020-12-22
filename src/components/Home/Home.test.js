@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import React from "react";
 import Home from "./Home";
 import PageHeader from "../PageHeader/PageHeader";
@@ -23,16 +23,21 @@ describe("Home", () => {
     },
   ];
 
+  global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ lists }),
+  })
+);
   let HomeWrapper;
+  let useEffect;
 
-//   beforeAll(() => {
-//     HomeWrapper = shallow(<Home />);
-//     global.fetch = jest.fn(() =>
-//       Promise.resolve({
-//         json: () => Promise.resolve({ lists }),
-//       })
-//     );
-//   });
+  const mockUseEffect= () => {
+      useEffect.mockImplementationOnce(f => f());
+  }
+
+  beforeEach(() => {
+    HomeWrapper = shallow(<Home />);
+  });
 
   it("renders the page header component", () => {
     expect(HomeWrapper.find(PageHeader)).toHaveLength(1);
@@ -42,7 +47,8 @@ describe("Home", () => {
     expect(HomeWrapper.find(Accordion)).not.toBeNull();
   });
 
-//   it("Accordion to have correct values", () => {
-//     expect(HomeWrapper.find(Accordion)).toHaveLength(2);
-//   });
+  it("fetches data and puts them into the wishlist", () => {
+    const useEffect = jest.spyOn(React, "useEffect").mockImplementation(f => f())
+    expect(fetch).toHaveBeenCalled();
+  });
 });
