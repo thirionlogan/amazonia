@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Paper,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Typography,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
 } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
+  homeContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+  },
+  accordion: {
+    width: '50%',
   },
 }));
 
@@ -21,35 +31,37 @@ const HomePage = ({ handleGetWishlists }) => {
   const [wishlists, setWishlists] = useState([]);
 
   useEffect(() => {
-    handleGetWishlists().then((data) => {
-      setWishlists(data);
-    });
+    handleGetWishlists()
+      .then((res) => res.json())
+      .then(setWishlists);
   }, []);
 
-  useEffect(() => {
-    console.log('rerender', wishlists);
-  }, [wishlists]);
-
   return (
-    <div>
-      {wishlists.map((wishlist) => {
+    <div className={classes.homeContainer}>
+      {wishlists.map((wishlist, index) => {
         return (
-          <Accordion>
+          <Accordion key={`Accordian${index}`} className={classes.accordion}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls='panel1a-content'
               id='panel1a-header'
             >
-              <Typography className={useStyles.heading}>
-                {wishlist.name}
+              <Typography className={classes.heading}>
+                {`${wishlist.name} by ${wishlist.author}`}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-                eget.
-              </Typography>
+              <FormGroup>
+                {wishlist.items.map((item, index) => {
+                  return (
+                    <FormControlLabel
+                      key={`WishlistItemCheckbox${index}`}
+                      control={<Checkbox />}
+                      label={item.name}
+                    />
+                  );
+                })}
+              </FormGroup>
             </AccordionDetails>
           </Accordion>
         );
