@@ -47,7 +47,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "npm run migrate && npm run seed && node server/server.js",
+    "server": "node server/server.js",
+    "preserver": "npm run rollback && npm run migrate && npm run seed",
     "migrate": "cd server && knex migrate:latest",
     "rollback": "cd server &&knex migrate:rollback",
     "seed": "cd server && knex seed:run "
