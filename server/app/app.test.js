@@ -194,7 +194,7 @@ describe('Endpoints', () => {
       expect(response.statusCode).toBe(500);
     });
 
-    it('should return the wishlists whose name includes the query parameter', async () => {
+    it('should return the wishlists whose author/name includes the query parameter', async () => {
       const wishlists = [
         {
           id: 1,
@@ -255,6 +255,22 @@ describe('Endpoints', () => {
       const response = await request(app).get('/search?query=wishlist');
       expect(response.statusCode).toBe(200);
       expect(response.body).toMatchObject(wishlists);
+    });
+
+    it('should return the wishlists whose author/name/item includes the query parameter', async () => {
+      const wishlist = [
+        {
+          id: 1,
+          name: "Bob's wishlist",
+          author: 'Bob',
+          items: [
+            { id: 1, wishlist_id: 1, name: 'skateboard' },
+            { id: 2, wishlist_id: 1, name: 'toothbrush' },
+          ],
+        }]
+      const response = await request(app).get('/search?query=skateboard');
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toMatchObject(wishlist);
     })
   });
 });
