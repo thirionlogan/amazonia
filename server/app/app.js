@@ -49,6 +49,17 @@ const updateWishlist = async (id, { name, author }) => {
   });
 };
 
+const updateItem = async (id, { name }) => {
+  return new WishListItem({ id, name }).save(null, {
+    require: true,
+    method: 'update',
+  });
+};
+
+const deleteItem = async (id) => {
+  return new WishListItem({ id }).destroy({ require: true });
+};
+
 app.get('/wishlist', async (req, res) => {
   getAllWishlists()
     .then((wishlists) => {
@@ -103,4 +114,46 @@ app.put('/wishlist/:id', (req, res) => {
     });
 });
 
+app.patch('/item/:id', (req, res) => {
+  updateItem(req.params.id, req.body)
+  .then(() => {
+    res
+    .status(200)
+    .send({ message: `Item ${req.params.id} has been updated`});
+  })
+  .catch((error) => {
+    res.status(500).send();
+  });
+});
+
+app.delete('/item/:id', (req, res) => {
+  deleteItem(req.params.id)
+    .then(() => {
+      res
+        .status(200)
+        .send({message: `Item ${req.params.id} has been deleted`});
+    })
+    .catch((error) => {
+      res.status(500).send();
+    });
+});
+
 module.exports = app;
+
+//Create a method for PATCH /item/:id
+
+
+
+
+
+
+
+
+
+//Delete to delete specific items not entire wishlist's
+
+
+
+
+
+

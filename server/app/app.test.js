@@ -1,6 +1,7 @@
 const request = require('supertest');
 const app = require('./app');
 const db = require('../data/db');
+const { update } = require('../data/db');
 
 describe('Endpoints', () => {
   beforeAll(async () => {
@@ -169,4 +170,42 @@ describe('Endpoints', () => {
       expect(response.statusCode).toBe(500);
     });
   });
+
+  describe('PATCH /item/:id', () => {
+    const updatedItem = {
+      name: "yeezys"
+    };
+  
+    it('should respond with a 200 and a message if updated', async () => {
+      const response = await request(app)
+      .patch('/item/5')
+      .send(updatedItem);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBe("Item 5 has been updated");
+    });
+    it('should respond with 500 if there is an error', async () => {
+      const response = await request(app)
+        .patch('/item/500')
+        .send(updatedItem);
+        expect(response.statusCode).toBe(500);  
+    });
+  });
+
+  describe('DELETE /item/:id', () => {
+    it('should respond with a 200 and a message if deleted', async () => {
+      const response = await request(app).delete('/item/5');
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBe("Item 5 has been deleted")
+    })
+
+    it('should respond with a 500 if there is an error', async () =>{
+      const response = await request(app).delete('/item/500');
+      expect(response.statusCode).toBe(500);
+    })
+  });
 });
+
+
+
+
+
