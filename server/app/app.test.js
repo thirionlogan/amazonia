@@ -200,7 +200,7 @@ describe('Endpoints', () => {
 
     it('should respond with a 500 if there is an error', async () =>{
       const response = await request(app).delete('/item/500');
-      expect(response.statusCode).toBe(500);
+      expect(response.statusCode).toBe(500)
     })
   });
 });
