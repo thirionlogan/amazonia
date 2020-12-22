@@ -4,8 +4,6 @@ import { handleGetWishlists } from '../../client/client';
 import HomePage from './HomePage';
 import { Accordion } from '@material-ui/core/';
 
-const flushPromises = () => new Promise(setImmediate);
-
 describe('HomePage', () => {
   let component;
 
@@ -14,8 +12,6 @@ describe('HomePage', () => {
   beforeEach(async () => {
     mockHandleGetWishlists.mockImplementation(handleGetWishlists);
     component = mount(<HomePage handleGetWishlists={mockHandleGetWishlists} />);
-    await flushPromises();
-    component.update();
   });
 
   afterEach(() => {
@@ -24,6 +20,9 @@ describe('HomePage', () => {
 
   it('should load wishlists', async () => {
     expect(mockHandleGetWishlists).toBeCalled();
-    expect(component.find(Accordion)).toHaveLength(2);
+    mockHandleGetWishlists()
+      .then((res) => res.json())
+      .then(console.log);
+    expect(component.exists(Accordion)).toBeTruthy();
   });
 });

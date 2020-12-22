@@ -11,16 +11,13 @@ import {
 } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   homeContainer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
+  heading: {},
   accordion: {
     width: '50%',
   },
@@ -33,7 +30,13 @@ const HomePage = ({ handleGetWishlists }) => {
   useEffect(() => {
     handleGetWishlists()
       .then((res) => res.json())
-      .then(setWishlists);
+      .then((data) => {
+        console.log('DATA BEFORE SET', data);
+        return data;
+      })
+      .then(setWishlists)
+      .then(() => console.log('WISHLIST AFTER SET', wishlists));
+    console.log('END OF USE EFFECT');
   }, []);
 
   return (
