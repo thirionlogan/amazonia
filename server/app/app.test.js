@@ -1,7 +1,6 @@
 const request = require('supertest');
 const app = require('./app');
 const db = require('../data/db');
-const { update } = require('../data/db');
 
 describe('Endpoints', () => {
   beforeAll(async () => {
@@ -204,8 +203,3 @@ describe('Endpoints', () => {
     })
   });
 });
-
-
-
-
-

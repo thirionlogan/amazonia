@@ -50,9 +50,10 @@ const updateWishlist = async (id, { name, author }) => {
 };
 
 const updateItem = async (id, { name }) => {
-  return new WishListItem({ id, name }).save(null, {
+  return new WishListItem({ id }).save({ name }, {
     require: true,
     method: 'update',
+    patch: true,
   });
 };
 
@@ -139,21 +140,3 @@ app.delete('/item/:id', (req, res) => {
 });
 
 module.exports = app;
-
-//Create a method for PATCH /item/:id
-
-
-
-
-
-
-
-
-
-//Delete to delete specific items not entire wishlist's
-
-
-
-
-
-
