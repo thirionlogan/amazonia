@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get('/wishlist', (req, res, ctx) => {
+  rest.get('http://localhost:3001/wishlist', (req, res, ctx) => {
     return res(
       ctx.json([
         {
