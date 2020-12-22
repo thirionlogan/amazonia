@@ -1,7 +1,7 @@
 import { mount, shallow } from "enzyme";
 import React from "react";
 import Home from "./Home";
-import PageHeader from "../PageHeader/PageHeader";
+
 import Accordion from "@material-ui/core/Accordion";
 
 describe("Home", () => {
@@ -24,31 +24,26 @@ describe("Home", () => {
   ];
 
   global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ lists }),
-  })
-);
+    Promise.resolve({
+      json: () => Promise.resolve({ lists }),
+    })
+  );
   let HomeWrapper;
-  let useEffect;
-
-  const mockUseEffect= () => {
-      useEffect.mockImplementationOnce(f => f());
-  }
 
   beforeEach(() => {
-    HomeWrapper = shallow(<Home />);
+    HomeWrapper = mount(<Home />);
   });
 
-  it("renders the page header component", () => {
-    expect(HomeWrapper.find(PageHeader)).toHaveLength(1);
-  });
+  it("loads the wishlists", () => {
+    expect(fetch).toHaveBeenCalledWith("http://localhost:3001/wishlist", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    expect(HomeWrapper.find('Accordion')).toHaveLength(2)
+    expect(HomeWrapper.find('Accordion').at(0).text()).toEqual(lists[0].name)
 
-  it("creates an accordian of wishlists", () => {
-    expect(HomeWrapper.find(Accordion)).not.toBeNull();
   });
-
-  it("fetches data and puts them into the wishlist", () => {
-    const useEffect = jest.spyOn(React, "useEffect").mockImplementation(f => f())
-    expect(fetch).toHaveBeenCalled();
-  });
+  // accordian should be closed
+  //accordian click
+  //accourdian should be open
 });

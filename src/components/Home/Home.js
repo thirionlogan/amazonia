@@ -74,28 +74,9 @@ const wishlistAccordians = (wishlists) => {
 };
 
 const Home = () => {
-  // const wishlists = [
-  //   {
-  //     id: 1,
-  //     name: "Bob's wishlist",
-  //     author: "Bob12",
-  //     items: [
-  //       { id: 1, wishlist_id: 1, name: "skateboard" },
-  //       { id: 2, wishlist_id: 1, name: "toothbrush" },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Allens's wishlist",
-  //     author: "Allen",
-  //     items: [{ id: 3, wishlist_id: 2, name: "coal" }],
-  //   },
-  // ];
-
   const [wishlist, setWishList] = useState([]);
 
   useEffect(() => {
-    console.log("I was called ");
     fetch("http://localhost:3001/wishlist")
       .then((response) => response.json())
       .then((data) => {
@@ -104,6 +85,7 @@ const Home = () => {
       })
       .catch((err) => console.log(`I CANT FINDS THA DATAS!!!!`));
   });
+  
   const classes = useStyles();
   return (
     <>
