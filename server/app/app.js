@@ -51,9 +51,9 @@ const updateWishlist = async (id, { name, author }) => {
 
 const getFilteredWishlists = async (query) => {
   return WishList.query(function (qb) {
-    qb.where("author", "=", `${query}`)
-      .orWhere("name", "=", `${query}`)
-  }).fetch({ withRelated: ["items"], require: true });
+    qb.where("name", "LIKE", `%${query}%`)
+    .orWhere("author", "LIKE", `%${query}%`)
+  }).fetchAll({ withRelated: ["items"], require: true });
 };
 
 app.get("/search", async (req, res) => {

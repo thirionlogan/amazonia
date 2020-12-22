@@ -1,15 +1,16 @@
 const request = require('supertest');
 const app = require('./app');
 const db = require('../data/db');
+const { ExpansionPanelActions } = require('@material-ui/core');
 
 describe('Endpoints', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await db.migrate.latest().then(() => {
       return db.seed.run();
     });
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await db.migrate.rollback();
   });
 
@@ -171,7 +172,7 @@ describe('Endpoints', () => {
   });
 
   describe('QUERY /search', () => {
-    const wishlist = {
+    const wishlist = [{
       id: 4,
       name: "Tim's wishlist",
       author: 'Tim',
@@ -180,9 +181,9 @@ describe('Endpoints', () => {
         { id: 8, wishlist_id: 4, name: 'tissue box' },
         { id: 9, wishlist_id: 4, name: 'plate' },
       ],
-    };
+    }];
 
-    it('should return the wishlists whose author include the query parameter', async() => {
+    it('should return the wishlists whose author include the query parameter', async () => {
       const response = await request(app).get('/search?query=Tim');
       expect(response.statusCode).toBe(200);
       expect(response.body).toMatchObject(wishlist);
@@ -191,6 +192,69 @@ describe('Endpoints', () => {
     it('should return a 500 if there is an error', async () => {
       const response = await request(app).get('/search?query=xyz');
       expect(response.statusCode).toBe(500);
+    });
+
+    it('should return the wishlists whose name includes the query parameter', async () => {
+      const wishlists = [
+        {
+          id: 1,
+          name: "Bob's wishlist",
+          author: 'Bob',
+          items: [
+            { id: 1, wishlist_id: 1, name: 'skateboard' },
+            { id: 2, wishlist_id: 1, name: 'toothbrush' },
+          ],
+        },
+        {
+          id: 2,
+          name: "Allens's wishlist",
+          author: 'Allen',
+          items: [{ id: 3, wishlist_id: 2, name: 'coal' }],
+        },
+        {
+          id: 3,
+          name: "Gavin's wishlist",
+          author: 'Gavin',
+          items: [
+            { id: 4, wishlist_id: 3, name: 'gavel' },
+            { id: 5, wishlist_id: 3, name: '4K TV' },
+            { id: 6, wishlist_id: 3, name: 'Vive' },
+          ],
+        },
+        {
+          id: 4,
+          name: "Tim's wishlist",
+          author: 'Tim',
+          items: [
+            { id: 7, wishlist_id: 4, name: 'People to stop calling him Tim-Tim' },
+            { id: 8, wishlist_id: 4, name: 'tissue box' },
+            { id: 9, wishlist_id: 4, name: 'plate' },
+          ],
+        },
+        {
+          id: 5,
+          name: "Dave's wishlist",
+          author: 'Dave',
+          items: [
+            { id: 10, wishlist_id: 5, name: 'remote' },
+            { id: 11, wishlist_id: 5, name: 'pair of socks' },
+            { id: 12, wishlist_id: 5, name: 'key' },
+          ],
+        },
+        {
+          id: 6,
+          name: "Sarah's wishlist",
+          author: 'Sarah',
+          items: [
+            { id: 13, wishlist_id: 6, name: 'coffee mug' },
+            { id: 14, wishlist_id: 6, name: 'tennis ball' },
+            { id: 15, wishlist_id: 6, name: 'tiger' },
+          ],
+        },
+      ];
+      const response = await request(app).get('/search?query=wishlist');
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toMatchObject(wishlists);
     })
   });
 });
