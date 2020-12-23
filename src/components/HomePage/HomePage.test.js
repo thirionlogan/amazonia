@@ -2,7 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { handleGetWishlists } from '../../client/client';
 import HomePage from './HomePage';
-import { Accordion } from '@material-ui/core/';
+import { MemoryRouter, Route } from 'react-router-dom';
+import { Accordion, Fab } from '@material-ui/core/';
 
 describe('HomePage', () => {
   let component;
@@ -10,7 +11,11 @@ describe('HomePage', () => {
 
   beforeEach(() => {
     mockHandleGetWishlists.mockImplementation(handleGetWishlists);
-    component = mount(<HomePage handleGetWishlists={mockHandleGetWishlists} />);
+    component = mount(
+      <MemoryRouter>
+        <HomePage handleGetWishlists={mockHandleGetWishlists} />
+      </MemoryRouter>
+    );
   });
 
   afterEach(() => {
@@ -21,5 +26,5 @@ describe('HomePage', () => {
     expect(mockHandleGetWishlists).toBeCalled();
     // expect(component.exists(Accordion)).toBeTruthy();
   });
+  //TODO FINISH THESE TESTS
 });
-//TODO FINISH THESE TESTS
