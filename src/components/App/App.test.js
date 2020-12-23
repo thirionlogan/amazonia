@@ -2,7 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 
-test('renders App', () => {
+describe('renders App', () => {
   const component = shallow(<App />);
-  expect(component.exists('PageHeader')).toBe(true);
+
+  it('should have a page header', () => {
+    expect(component.exists('PageHeader')).toBe(true);
+  });
 });
