@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const WishlistEditor = () => {
+const WishlistEditor = ({ handleSendWishlist }) => {
   const classes = useStyles();
 
   const [name, setName] = useState('');
@@ -49,10 +49,6 @@ const WishlistEditor = () => {
   };
 
   const handleSubmit = (event) => {
-    if (validateInput()) sendWishlist();
-  };
-
-  const sendWishlist = () => {
     const filteredItems = items
       .map((item) => item.trim())
       .filter((item) => item);
@@ -62,14 +58,7 @@ const WishlistEditor = () => {
       author,
       items: filteredItems,
     };
-
-    fetch('http://localhost:3001/wishlist', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    if (validateInput()) handleSendWishlist(data);
   };
 
   const validateInput = () => {
