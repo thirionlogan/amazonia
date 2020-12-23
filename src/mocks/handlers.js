@@ -22,7 +22,7 @@ export const handlers = [
       ctx.status(200)
     );
   }),
-  rest.post('/wishlist', (req, res, ctx) => {
+  rest.post('http://localhost:3001/wishlist', (req, res, ctx) => {
     return res(ctx.status(201));
   }),
 ];
