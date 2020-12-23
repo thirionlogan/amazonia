@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 });
 
 const Wishlist = ({ wishlist, handleDeleteWishlist, expanded = false }) => {
-  const classes = useStyles();
   const { name, author, items, id } = wishlist;
   const [wishlistExpanded, setWishlistExpanded] = useState(expanded);
 
