@@ -25,4 +25,10 @@ export const handlers = [
   rest.post('http://localhost:3001/wishlist', (req, res, ctx) => {
     return res(ctx.status(201));
   }),
+  rest.delete('http://localhost:3001/wishlist/:id', (req, res, ctx) => {
+    return res(
+      ctx.json({ message: `Item ${req.params.id} has been deleted` }),
+      ctx.status(200)
+    );
+  }),
 ];
