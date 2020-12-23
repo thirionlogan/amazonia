@@ -24,7 +24,5 @@ describe('HomePage', () => {
 
   it('should load wishlists', () => {
     expect(mockHandleGetWishlists).toBeCalled();
-    // expect(component.exists(Accordion)).toBeTruthy();
   });
-  //TODO FINISH THESE TESTS
 });
