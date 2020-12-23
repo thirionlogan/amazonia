@@ -49,16 +49,22 @@ const updateWishlist = async (id, { name, author }) => {
   });
 };
 
-const getFilteredWishlists = async (query) => {
-  return WishList.query(function (qb) {
-    qb.where("name", "LIKE", `%${query}%`)
-    .orWhere("author", "LIKE", `%${query}%`)
+const getSearchResults = async (query) => {
+  const filteredLists = WishList.query(function (qb) {
+    qb.join("item", "item.wishlist_id", "wishlist.id").where(
+      "item.name",
+      "LIKE",
+      `%${query}%`
+    ).orWhere("wishlist.name", "LIKE", `%${query}%`)
+    .orWhere("wishlist.author", "LIKE", `%${query}%`)
   }).fetchAll({ withRelated: ["items"], require: true });
+
+  return (filteredLists);
 };
 
 app.get("/search", async (req, res) => {
-  const query = decodeURIComponent(req.query.query);
-  getFilteredWishlists(query)
+  const search = req.query.query;
+  getSearchResults(search)
     .then((wishlists) => {
       res.status(200).send(wishlists);
     })

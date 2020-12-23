@@ -173,18 +173,14 @@ describe('Endpoints', () => {
 
   describe('QUERY /search', () => {
     const wishlist = [{
-      id: 4,
-      name: "Tim's wishlist",
-      author: 'Tim',
-      items: [
-        { id: 7, wishlist_id: 4, name: 'People to stop calling him Tim-Tim' },
-        { id: 8, wishlist_id: 4, name: 'tissue box' },
-        { id: 9, wishlist_id: 4, name: 'plate' },
-      ],
-    }];
+        id: 2,
+        name: "Allens's wishlist",
+        author: 'Allen',
+        items: [{ id: 3, wishlist_id: 2, name: 'coal' }],
+      }];
 
     it('should return the wishlists whose author include the query parameter', async () => {
-      const response = await request(app).get('/search?query=Tim');
+      const response = await request(app).get('/search?query=Allen');
       expect(response.statusCode).toBe(200);
       expect(response.body).toMatchObject(wishlist);
     });
