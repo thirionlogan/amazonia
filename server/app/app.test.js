@@ -172,7 +172,8 @@ describe('Endpoints', () => {
 
   describe('PATCH /item/:id', () => {
     const updatedItem = {
-      name: "yeezys"
+      name: "yeezys",
+      reserve: true
     };
   
     it('should respond with a 200 and a message if updated', async () => {
@@ -188,6 +189,13 @@ describe('Endpoints', () => {
         .send(updatedItem);
         expect(response.statusCode).toBe(500);  
     });
+    it('should change the reserve property from the default false to true', async () => {
+      const response = await request(app)
+      .patch('/item/5')
+      .send(updatedItem);
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toBe('Item 5 has been updated');
+    })
   });
 
   describe('DELETE /item/:id', () => {
@@ -201,5 +209,6 @@ describe('Endpoints', () => {
       const response = await request(app).delete('/item/500');
       expect(response.statusCode).toBe(500)
     })
+    
   });
 });

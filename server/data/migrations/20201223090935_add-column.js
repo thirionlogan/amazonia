@@ -1,6 +1,6 @@
 exports.up = (knex) => {
     return knex.schema.table('item', (table) => {
-         table.boolean('Reserved')
+         table.boolean('reserved')
              .notNullable()
              .defaultTo(0)
      })
@@ -8,6 +8,6 @@ exports.up = (knex) => {
  
  exports.down = (knex) => {
      return knex.schema.table('item', (table) => {
-         table.dropColumn('Reserved')
+         table.dropColumn('reserved')
      })
  };
