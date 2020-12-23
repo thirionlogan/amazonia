@@ -30,15 +30,8 @@ const HomePage = ({ handleGetWishlists }) => {
   useEffect(() => {
     handleGetWishlists()
       .then((res) => res.json())
-      .then((data) => {
-        console.log('DATA BEFORE SET', data);
-        return data;
-      })
-      .then(setWishlists)
-      .then(() => console.log('WISHLIST AFTER SET', wishlists));
-    console.log('END OF USE EFFECT');
-  }, []);
-
+      .then(setWishlists);
+  }, [handleGetWishlists]);
   return (
     <div className={classes.homeContainer}>
       {wishlists.map((wishlist, index) => {
