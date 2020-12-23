@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Fab,
-} from '@material-ui/core/';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Fab } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
+import Wishlist from '../Wishlist/Wishlist';
+import { handleDeleteWishlist } from '../../client/client';
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
@@ -50,30 +42,11 @@ const HomePage = ({ handleGetWishlists }) => {
         <div className={classes.wishlistContainer}>
           {wishlists.map((wishlist, index) => {
             return (
-              <Accordion key={`Accordian${index}`}>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1a-content'
-                  id='panel1a-header'
-                >
-                  <Typography>
-                    {`${wishlist.name} by ${wishlist.author}`}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <FormGroup>
-                    {wishlist.items.map((item, index) => {
-                      return (
-                        <FormControlLabel
-                          key={`WishlistItemCheckbox${index}`}
-                          control={<Checkbox />}
-                          label={item.name}
-                        />
-                      );
-                    })}
-                  </FormGroup>
-                </AccordionDetails>
-              </Accordion>
+              <Wishlist
+                wishlist={wishlist}
+                handleDeleteWishlist={handleDeleteWishlist}
+                key={`Accordian${index}`}
+              />
             );
           })}
         </div>
