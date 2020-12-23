@@ -14,7 +14,7 @@ describe('PageHeader', () => {
     expect(component.exists('img')).toBe(true);
   });
 
-  it('Does header contain a seach bar', () => {
+  it('Does header contain a search bar', () => {
     expect(component.exists(TextField)).toBe(true);
   });
 });
