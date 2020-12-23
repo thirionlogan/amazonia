@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
-import { Paper, TextField, Button, FormControl } from '@material-ui/core/';
+import { Link, Redirect } from 'react-router-dom';
+import {
+  Paper,
+  TextField,
+  Button,
+  FormControl,
+  IconButton,
+} from '@material-ui/core/';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
 
 import './WishlistEditor.css';
 
@@ -15,6 +23,8 @@ const useStyles = makeStyles({
   paper: {
     width: '50%',
     padding: '3%',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   input: {
     marginBottom: '16px',
@@ -30,6 +40,7 @@ const WishlistEditor = ({ handleSendWishlist }) => {
   const [nameErrorText, setNameErrorText] = useState('');
   const [authorErrorText, setAuthorErrorText] = useState('');
   const [itemErrorText, setItemErrorText] = useState('');
+  const [redirect, setRedirect] = useState('');
 
   const handleNameChange = (event) => {
     setNameErrorText('');
@@ -58,7 +69,10 @@ const WishlistEditor = ({ handleSendWishlist }) => {
       author,
       items: filteredItems,
     };
-    if (validateInput()) handleSendWishlist(data);
+    if (validateInput()) {
+      handleSendWishlist(data);
+      setRedirect('/');
+    }
   };
 
   const validateInput = () => {
@@ -80,6 +94,7 @@ const WishlistEditor = ({ handleSendWishlist }) => {
 
   return (
     <div className={classes.wishlistEditorContainer}>
+      {redirect ? <Redirect to={redirect} /> : null}
       <h1>Make a Wishlist</h1>
       <Paper className={classes.paper}>
         <FormControl>
@@ -127,6 +142,11 @@ const WishlistEditor = ({ handleSendWishlist }) => {
             Save
           </Button>
         </FormControl>
+        <Link to='/'>
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        </Link>
       </Paper>
     </div>
   );
