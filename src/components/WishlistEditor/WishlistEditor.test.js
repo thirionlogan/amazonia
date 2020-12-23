@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { TextField, Button } from '@material-ui/core/';
 import { handleSendWishlist } from '../../client/client';
+import { MemoryRouter, Route } from 'react-router-dom';
 
 import WishlistEditor from './WishlistEditor';
 
@@ -17,7 +18,11 @@ describe('Wishlist Editor', () => {
 
   beforeEach(() => {
     mockSendWishlist.mockImplementation(handleSendWishlist);
-    component = mount(<WishlistEditor handleSendWishlist={mockSendWishlist} />);
+    component = mount(
+      <MemoryRouter>
+        <WishlistEditor handleSendWishlist={mockSendWishlist} />
+      </MemoryRouter>
+    );
   });
 
   afterEach(() => {
