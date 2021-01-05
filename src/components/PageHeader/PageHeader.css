@@ -1,0 +1,22 @@
+header {
+  background-color: #474747;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+img {
+  padding-left: 50px;
+  height: 50px;
+  width: 100px;
+}
+
+input {
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid white;
+  margin-right: 15px;
+}
